@@ -1,5 +1,5 @@
 {
-  "name": "Devcontainer",
+  "name": "vscode-in-docker",
   "build": {
     "dockerfile": "Dockerfile"
   }
