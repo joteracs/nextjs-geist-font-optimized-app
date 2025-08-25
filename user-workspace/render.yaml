@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: educational-platform
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXTAUTH_URL
+        sync: false
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: educational-platform-db
+          property: connectionString
+
+databases:
+  - name: educational-platform-db
+    databaseName: educational_platform
+    user: educational_platform_user
+    plan: free

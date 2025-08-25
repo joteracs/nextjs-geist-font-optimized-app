@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Educational Platform
 
-## Getting Started
+A modern, responsive educational platform built with Next.js 15, featuring user authentication, question management, and interactive learning tools.
 
-First, run the development server:
+## 🚀 Features
 
+### Authentication & User Management
+- **Secure Login System**: Email/username and password authentication
+- **Role-Based Access**: Admin and Common User roles with different permissions
+- **Single Device Login**: Prevents simultaneous logins from multiple devices
+- **Session Management**: 10-minute automatic timeout for security
+- **User Administration**: Complete CRUD operations for user management
+
+### Learning Features
+- **Question Solving**: Interactive multiple-choice question interface
+- **Flashcard System**: Review previously answered questions in flashcard format
+- **Progress Tracking**: Statistics on questions answered and accuracy rates
+- **Subject Organization**: Questions organized by topics/subjects
+- **Welcome Onboarding**: Guided experience for new users
+
+### Admin Dashboard
+- **Question Management**: Create, edit, and delete questions with multiple alternatives
+- **User Management**: Add, edit, and manage user accounts and permissions
+- **Analytics**: Monitor user activity and platform usage
+- **Content Control**: Full administrative control over platform content
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: NextAuth.js
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Forms**: React Hook Form with Zod validation
+- **Icons**: Lucide React
+- **Notifications**: Sonner
+
+## 🏃‍♂️ Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm/yarn/pnpm/bun
+
+### Local Development
+
+1. **Clone the repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd educational-platform
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Set up environment variables**
+Create a `.env.local` file:
+```env
+DATABASE_URL="postgresql://username:password@localhost:5432/educational_platform"
+NEXTAUTH_URL="http://localhost:8000"
+NEXTAUTH_SECRET="your-secret-key-here"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Set up the database**
+```bash
+npx prisma generate
+npx prisma db push
+npx prisma db seed
+```
 
-## Learn More
+5. **Start the development server**
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:8000](http://localhost:8000) to view the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Default Users (after seeding)
+- **Admin**: `admin@example.com` / `admin123`
+- **Student**: `user@example.com` / `user123`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Deployment
 
-## Deploy on Vercel
+### Render.com (Recommended)
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Other Platforms
+The application can be deployed on any platform that supports Node.js and PostgreSQL:
+- Vercel (with external PostgreSQL)
+- Railway
+- Heroku
+- DigitalOcean App Platform
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   ├── dashboard/         # Protected dashboard pages
+│   ├── login/            # Authentication pages
+│   └── globals.css       # Global styles
+├── components/            # Reusable components
+│   ├── ui/               # shadcn/ui components
+│   └── dashboard/        # Dashboard-specific components
+├── lib/                  # Utility functions
+├── hooks/                # Custom React hooks
+└── types/                # TypeScript type definitions
+
+prisma/
+├── schema.prisma         # Database schema
+└── seed.ts              # Database seeding script
+```
+
+## 🔧 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run db:seed` - Seed database with sample data
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+For support and questions:
+- Check the [DEPLOYMENT.md](./DEPLOYMENT.md) for deployment issues
+- Review the application logs for debugging
+- Open an issue in the repository
+
+## 🎯 Roadmap
+
+- [ ] Email notifications
+- [ ] Advanced analytics dashboard
+- [ ] Question categories and tags
+- [ ] Bulk question import/export
+- [ ] Mobile app development
+- [ ] Multi-language support

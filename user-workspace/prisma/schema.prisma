@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  username      String    @unique
+  password      String
+  role          UserRole  @default(COMMON)
+  sessionToken  String?   @unique
+  lastLogin     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  answers       UserAnswer[]
+  questions     Question[]
+}
+
+model Question {
+  id            String   @id @default(cuid())
+  statement     String
+  alternatives  String   // JSON string containing array of alternatives
+  correctAnswer Int
+  subject       String
+  createdBy     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  user          User     @relation(fields: [createdBy], references: [id])
+  answers       UserAnswer[]
+}
+
+model UserAnswer {
+  id            String   @id @default(cuid())
+  userId        String
+  questionId    String
+  selectedAnswer Int
+  isCorrect     Boolean
+  timestamp     DateTime @default(now())
+  
+  user          User     @relation(fields: [userId], references: [id])
+  question      Question @relation(fields: [questionId], references: [id])
+  
+  @@unique([userId, questionId])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  @@index([token])
+}
+
+enum UserRole {
+  COMMON
+  ADMIN
+}
